@@ -17,7 +17,7 @@ public class ImageController {
 
     @GetMapping("")
     public ResponseEntity<List<Image>> getImages(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                 @RequestParam(value = "size", defaultValue = "5") int size) throws IOException {
+                                                 @RequestParam(value = "size", defaultValue = "5") int size){
         return ResponseEntity.ok(imageService.getImages(page, size));
     }
 

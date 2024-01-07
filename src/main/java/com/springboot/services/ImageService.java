@@ -21,17 +21,8 @@ public class ImageService {
 
     private final String IMAGE_URL = "https://serpapi.com/search.json?q=Apple&engine=google_images&ijn=0";
 
-    public List<Image> getImages(int page, int size) throws IOException {
-        ResponseEntity<String> response = new RestTemplate().getForEntity(IMAGE_URL, String.class);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(response.getBody(), HashMap.class);
-
-        ArrayList<LinkedHashMap> images = (ArrayList)map.get("images_results");
-        Image image = mapper.convertValue(images.get(0), Image.class);
-        List<Image> imageList = mapper.convertValue(images, new TypeReference<List<Image>>(){});
-
-        imageRepository.saveAll(imageList);
-        PageRequest pageable = PageRequest.of(page, size, Sort.by("createdDt").ascending());
+    public List<Image> getImages(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("position").ascending());
         return imageRepository.findAll(pageable).getContent();
     }
 
