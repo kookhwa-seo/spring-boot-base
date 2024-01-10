@@ -3,6 +3,7 @@ package com.springboot.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.domain.Image;
+import com.springboot.payload.ImageRequest;
 import com.springboot.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -35,5 +36,16 @@ public class ImageService {
         List<Image> imageList = mapper.convertValue(images, new TypeReference<List<Image>>(){});
 
         imageRepository.saveAll(imageList);
+    }
+
+    public Image createImage(ImageRequest request){
+        Image image = Image.builder()
+                           .thumbnail(request.getThumbnail())
+                           .title(request.getTitle())
+                           .original_width(request.getOriginal_width())
+                           .original_height(request.getOriginal_height())
+                           .build();
+
+        return imageRepository.save(image);
     }
 }

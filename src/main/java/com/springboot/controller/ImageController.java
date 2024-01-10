@@ -1,17 +1,22 @@
 package com.springboot.controller;
 
 import com.springboot.domain.Image;
+import com.springboot.payload.ImageRequest;
 import com.springboot.services.ImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/images")
+@Validated
 public class ImageController {
     private final ImageService imageService;
 
@@ -22,8 +27,13 @@ public class ImageController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createImage() throws IOException {
+    public ResponseEntity<String> createImages() throws IOException {
         imageService.createImages();
-        return ResponseEntity.ok("success!!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("success!!");
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Image> createImage(@Valid @RequestBody ImageRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(imageService.createImage(request));
     }
 }

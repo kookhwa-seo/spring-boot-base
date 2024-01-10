@@ -63,4 +63,23 @@ public class Image {
     @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     public Timestamp updatedDt;
+
+    @Builder
+    public Image(Integer position, String thumbnail, String related_content_id, String serpapi_related_content_link, String source, String source_logo, String title, String link, String tag, String original, int original_width, int original_height, Boolean is_product, Timestamp createdDt, Timestamp updatedDt) {
+        this.position = position;
+        this.thumbnail = thumbnail;
+        this.related_content_id = related_content_id;
+        this.serpapi_related_content_link = serpapi_related_content_link;
+        this.source = source;
+        this.source_logo = source_logo;
+        this.title = title;
+        this.link = link;
+        this.tag = tag;
+        this.original = original;
+        this.original_width = original_width;
+        this.original_height = original_height;
+        this.is_product = is_product;
+        this.createdDt = createdDt;
+        this.updatedDt = updatedDt;
+    }
 }
