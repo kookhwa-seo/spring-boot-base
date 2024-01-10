@@ -1,4 +1,4 @@
-package com.springboot.payload;
+package com.springboot.payload.request;
 
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.springboot.controller;
 
 import com.springboot.domain.Image;
-import com.springboot.payload.ImageRequest;
+import com.springboot.payload.request.ImageRequest;
 import com.springboot.services.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
