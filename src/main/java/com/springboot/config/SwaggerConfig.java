@@ -34,5 +34,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         //swagger-ui.html 요청이 왔을 때 접근할 정적리소스 위치 지정
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }

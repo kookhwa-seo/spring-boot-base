@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.domain.Image;
 import com.springboot.payload.request.ImageRequest;
+import com.springboot.payload.response.ImageResponse;
 import com.springboot.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -23,9 +24,17 @@ public class ImageService {
 
     private final String IMAGE_URL = "https://serpapi.com/search.json?q=Apple&engine=google_images&ijn=0";
 
-    public List<Image> getImages(int page, int size) {
+    public List<ImageResponse> getImages(int page, int size) {
         PageRequest pageable = PageRequest.of(page, size, Sort.by("position").ascending());
-        return imageRepository.findAll(pageable).getContent();
+        List<Image> imageList = imageRepository.findAll(pageable).getContent();
+
+        List<ImageResponse> resultList = new ArrayList<>();
+        for(Image image : imageList){
+            ImageResponse imageResponse = new ImageResponse(image);
+            imageResponse.setDummy("success!!!");
+            resultList.add(imageResponse);
+        }
+        return resultList;
     }
 
     @Transactional

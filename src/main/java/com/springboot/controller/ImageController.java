@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.domain.Image;
 import com.springboot.payload.request.ImageRequest;
+import com.springboot.payload.response.ImageResponse;
 import com.springboot.services.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class ImageController {
     private final ImageService imageService;
 
     @GetMapping("")
-    public ResponseEntity<List<Image>> getImages(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                 @RequestParam(value = "size", defaultValue = "5") int size){
+    public ResponseEntity<List<ImageResponse>> getImages(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                         @RequestParam(value = "size", defaultValue = "5") int size){
         return ResponseEntity.ok(imageService.getImages(page, size));
     }
 
